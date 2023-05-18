@@ -31,8 +31,9 @@ export function useApp() {
   const handleChangeMatrix = (i: number, j: number, event: React.ChangeEvent<HTMLInputElement>) => {
     let newMatrix = [...matrix];
 
-    if (Number(event.target.value) >= -1 && Number(event.target.value) < 10000) {
+    if (Number(event.target.value) >= 0 && Number(event.target.value) < 10000) {
       newMatrix[i][j] = Number(event.target.value);
+      newMatrix[j][i] = Number(event.target.value);
     }
     setMatrix(newMatrix);
   }

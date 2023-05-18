@@ -1,13 +1,13 @@
-import { FC } from 'react'
+import { FC, useState} from 'react'
 import styles from "./App.module.scss";
 import {useApp} from "./useApp"
-import { solve } from './solution';
+import { dijkstra } from './solution';
 
 
 const App: FC = () => {
   const { matrix, error, handleChange, handleChangeMatrix, createMatrix} = useApp();
+  const [result, setResult] = useState<number[]>([]);
 
-  console.log(matrix)
   return ( 
     <main className={styles.main}>
       <h2 className={styles.title}>Алгоритм Дейкстры</h2>
@@ -33,7 +33,8 @@ const App: FC = () => {
             }
             
           </div>
-          <button onClick={() => solve(matrix)}>Посчитать</button>
+          <button onClick={() => setResult(dijkstra(matrix, 1))}>Посчитать</button>
+          <div>{result.join(" ")}</div>
         </div> : 
         <div>{error}</div>}
       </div>
