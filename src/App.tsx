@@ -1,56 +1,12 @@
-import { useState, FC, useEffect } from 'react'
+import { FC } from 'react'
 import styles from "./App.module.scss";
+import {useApp} from "./useApp"
+import { solve } from './solution';
 
 
 const App: FC = () => {
-  const [n, setSize] = useState(NaN);
-  const [matrix, setMatrix] = useState<number[][]>([[]]); 
-  const [error, setError] = useState("");
+  const { matrix, error, handleChange, handleChangeMatrix, createMatrix} = useApp();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-
-      setSize(Number(event.target.value));
-    
-  }
-
-  const createMatrix = (event: React.FormEvent) => {
-    event.preventDefault();
-    let matrix: number[][] = [];
-    if (n > 0) {
-      for (let i = 0; i < n; i++) {
-        matrix.push([]);
-        for (let j = 0; j < n; j++) {
-          matrix[i].push(0);
-        }
-      }
-  
-      setMatrix(matrix);
-    }
-    
-  }
-
-  const handleChangeMatrix = (i: number, j: number, event: React.ChangeEvent<HTMLInputElement>) => {
-    let newMatrix = [...matrix];
-
-    if (Number(event.target.value) >= 0 && Number(event.target.value) < 10000) {
-      newMatrix[i][j] = Number(event.target.value);
-    }
-    setMatrix(newMatrix);
-  }
-
-  useEffect(() => {
-    if (n < 0) {
-      setError("Введите корректные данные");
-    }
-    else {
-      setError("");
-    }
-
-  }, [n])
-
-  const solve = () => {
-    null;
-  }
   console.log(matrix)
   return ( 
     <main className={styles.main}>
@@ -77,7 +33,7 @@ const App: FC = () => {
             }
             
           </div>
-          <button onClick={() => solve()}>Посчитать</button>
+          <button onClick={() => solve(matrix)}>Посчитать</button>
         </div> : 
         <div>{error}</div>}
       </div>
