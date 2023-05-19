@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export function useApp() {
-    const [n, setSize] = useState(NaN);
+  const [n, setSize] = useState(NaN);
   const [matrix, setMatrix] = useState<number[][]>([[]]); 
   const [error, setError] = useState("");
 

@@ -7,7 +7,8 @@ import { dijkstra } from './solution';
 const App: FC = () => {
   const { matrix, error, handleChange, handleChangeMatrix, createMatrix} = useApp();
   const [result, setResult] = useState<number[]>([]);
-
+  const [startNode, setStartNode] = useState<number>(0);
+  
   return ( 
     <main className={styles.main}>
       <h2 className={styles.title}>Алгоритм Дейкстры</h2>
@@ -18,7 +19,7 @@ const App: FC = () => {
         </form>
         {(matrix[0].length !== 0) ? 
         <div className={styles.matrix}>
-          Матрица
+          Матрица 
           <div>
             {matrix.map((row, i) => (
               <div key={i} className={styles.row}>
@@ -33,8 +34,12 @@ const App: FC = () => {
             }
             
           </div>
-          <button onClick={() => setResult(dijkstra(matrix, 1))}>Посчитать</button>
-          <div>{result.join(" ")}</div>
+          <input placeholder='Введите начальную вершину' value={startNode} type='text' onChange={(event) => setStartNode(Number(event.target.value))}></input>
+          <div>
+            <button onClick={() => setResult(dijkstra(matrix, startNode - 1))}>Алгоритм   Дейкстры</button>
+            <button>Алгоритм Флойда</button>
+          </div>
+          {result}
         </div> : 
         <div>{error}</div>}
       </div>
