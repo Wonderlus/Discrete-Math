@@ -42,7 +42,7 @@ export function dijkstra(matrix: number[][], startNode: number) {
 
 
     }
-    return distances;
+    return printResult(distances, result, n);
   }
   
 // Функция для поиска вершины с наименьшим расстоянием
@@ -76,10 +76,9 @@ function buildPath(result: any, from: number, to: number,  startNode: number) : 
 }
 
 function printResult(distances: number[], result: any, n: number) {
-  // брать value из result добавлять к ним значение из distance
-  let final = new Map()
-  for (let i = 1; i < n; i++) {
-    final.set(result.get(i), distances[i - 1]);
+  let final = []
+  for (let i = 0; i < n; i++) {
+    final.push(result.get(i + 1) + " " + distances[i]);
   }
 
   return final;

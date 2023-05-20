@@ -6,12 +6,14 @@ import { dijkstra } from './solution';
 
 const App: FC = () => {
   const { matrix, error, handleChange, handleChangeMatrix, createMatrix} = useApp();
-  const [result, setResult] = useState<number[]>([]);
+  const [result, setResult] = useState<string[]>([]);
   const [startNode, setStartNode] = useState<number>(0);
   
+  console.log(result)
+
   return ( 
     <main className={styles.main}>
-      <h2 className={styles.title}>Алгоритм Дейкстры</h2>
+      <h2 className={styles.title}>Алгоритм Дейкстры и Флойда</h2>
       <div>
         <form onSubmit={createMatrix}>
           <input id='size'  type='text' onChange={handleChange} placeholder='Введите размер матрицы'/>
@@ -34,12 +36,14 @@ const App: FC = () => {
             }
             
           </div>
-          <input placeholder='Введите начальную вершину' value={startNode} type='text' onChange={(event) => setStartNode(Number(event.target.value))}></input>
-          <div>
+          <input className={styles.inputNode} placeholder='Введите начальную вершину' type='text' onChange={(event) => setStartNode(Number(event.target.value))}></input>
+          <div className={styles.buttons}>
             <button onClick={() => setResult(dijkstra(matrix, startNode - 1))}>Алгоритм   Дейкстры</button>
             <button>Алгоритм Флойда</button>
           </div>
-          {result}
+          {result.map(elem => (
+            <div>{elem}</div>
+          ))}
         </div> : 
         <div>{error}</div>}
       </div>
