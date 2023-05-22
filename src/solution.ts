@@ -78,7 +78,7 @@ function buildPath(result: any, from: number, to: number,  startNode: number) : 
 function printResult(distances: number[], result: any, n: number) {
   let final = []
   for (let i = 0; i < n; i++) {
-    final.push(result.get(i + 1) + " " + distances[i]);
+    final.push("Путь: " + result.get(i + 1) + " Длина пути: " + distances[i]);
   }
 
   return final;
